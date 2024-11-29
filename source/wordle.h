@@ -24,7 +24,7 @@ typedef struct s_letter {
 } t_letter;
 
 bool validate_input(const char *input);
-void prompt_input(char **input);
+bool prompt_input(char **input);
 void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH]);
 
 void convert_input(const char *input, t_letter guess[WORD_LENGTH]);

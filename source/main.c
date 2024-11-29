@@ -14,7 +14,10 @@ int main(void)
 	{
 		// print_guesses(guesses);
 
-		prompt_input(&input);
+		if (!prompt_input(&input))
+		{
+			break;
+		}
 		if (!validate_input(input))
 		{
 			continue;
