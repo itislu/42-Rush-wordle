@@ -45,6 +45,7 @@ VALGRINDFLAGS	=	--errors-for-leak-kinds=all \
 					--read-var-info=yes \
 					--show-error-list=yes \
 					--show-leak-kinds=all \
+					--suppressions=$(CURDIR)/readline.supp \
 					--trace-children=yes \
 					--track-origins=yes
 
