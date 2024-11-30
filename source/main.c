@@ -20,7 +20,6 @@ int main(void)
 	pick_word(&word);
 	while (!is_game_finished(guesses, guess_count, &word))
 	{
-		print_guesses(guesses);
 		if (!prompt_input(&input))
 		{
 			printf("Goodbye!\n");
@@ -42,6 +41,7 @@ static bool is_game_finished(
 	int guess_count, 
 	const t_word *word)
 {
+	print_guesses(guesses);
 	if (guess_count == 0)
 	{
 		return false;
@@ -58,7 +58,6 @@ static bool is_game_finished(
 			return false;
 		}
 	}
-	print_guesses(guesses);
 	printf("You guessed '%s' correctly!\n", word->word);
 	printf("Guesses needed: %d\n", guess_count);
 	return true;
