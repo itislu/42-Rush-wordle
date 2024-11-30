@@ -30,11 +30,11 @@ bool prompt_input(char **input)
 
 bool validate_input(const char *input)
 {
-	if (!(is_valid_length(input)))
+	if (!is_valid_length(input))
 		return(false);
-	if (!(is_alphabetic(input)))
+	if (!is_alphabetic(input))
 		return(false);
-	if (!(is_in_dictionary(input)))
+	if (!is_in_dictionary(input))
 		return(false);
 	return (true);
 }
@@ -51,7 +51,7 @@ static bool is_alphabetic(const char *input)
 	int i = 0;
 	while (input[i])
 	{
-		if (!(isalpha(input[i])))
+		if (!isalpha(input[i]))
 			return (false);
 		i++;
 	}
