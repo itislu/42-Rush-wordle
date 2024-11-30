@@ -15,9 +15,6 @@ void convert_input(const char *input, t_letter guess[WORD_LENGTH])
 
 void compare_guess(t_letter guess[WORD_LENGTH], t_word word)
 {
-	// int alphabet[26];
-	// memcpy(alphabet, word->alphabet, sizeof(alphabet));
-
 	set_green(guess, &word);
 	set_yellow(guess, &word);
 }

@@ -7,7 +7,7 @@
 #define MAX_GUESSES 6
 
 // We can do the exact wordle colors
-#define COLOR_RESET "\e0m"
+#define COLOR_RESET "\e[0m"
 #define COLOR_GREEN "\e[32m"
 #define COLOR_YELLOW "\e[33m"
 #define COLOR_GREY "\e[90m"

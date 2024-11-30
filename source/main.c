@@ -5,7 +5,9 @@
 #include <stdlib.h>
 
 static bool is_game_finished(
-	t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_count);
+	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
+	int guess_count, 
+	const t_word *word);
 
 int main(void)
 {
@@ -15,29 +17,31 @@ int main(void)
 	int guess_count = 0;
 
 	pick_word(&word);
-	while (!is_game_finished(guesses, guess_count))
+	print_guesses(guesses);
+	while (!is_game_finished(guesses, guess_count, &word))
 	{
-		// print_guesses(guesses);
-
 		if (!prompt_input(&input))
 		{
+			printf("Goodbye!\n");
 			break;
 		}
 		if (!validate_input(input))
 		{
+			printf("\n");
 			continue;
 		}
-
 		convert_input(input, guesses[guess_count]);
 		compare_guess(guesses[guess_count], word);
-
+		print_guesses(guesses);
 		guess_count++;
 	}
 	free(word.word);
 }
 
 static bool is_game_finished(
-	t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_count)
+	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
+	int guess_count, 
+	const t_word *word)
 {
 	if (guess_count == 0)
 	{
@@ -45,6 +49,7 @@ static bool is_game_finished(
 	}
 	if (guess_count >= MAX_GUESSES)
 	{
+		printf("You ran out of guesses!\n");
 		return true;
 	}
 	for (int i = 0; i < WORD_LENGTH; i++)
@@ -54,5 +59,7 @@ static bool is_game_finished(
 			return false;
 		}
 	}
+	printf("You guessed '%s' correctly!\n", word->word);
+	printf("Guesses needed: %d\n", guess_count);
 	return true;
 }

@@ -13,7 +13,7 @@ void pick_word(t_word *word)
 	long idx = random() % (sizeof(g_dict) / sizeof(char *));
 	word->word = strdup(g_dict[idx]);
 
-	str_tolower(word->word);
+	str_toupper(word->word);
 	count_occurances(word);
 }
 

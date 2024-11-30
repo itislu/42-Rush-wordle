@@ -24,18 +24,27 @@ bool prompt_input(char **input)
 	{
 		add_history(*input);
 	}
-	str_tolower(*input);
+	str_toupper(*input);
 	return true;
 }
 
 bool validate_input(const char *input)
 {
 	if (!is_valid_length(input))
+	{
+		printf("Not a 5 letter word!\n");
 		return(false);
+	}
 	if (!is_alphabetic(input))
+	{
+		printf("All characters have to be alphabetic!\n");
 		return(false);
+	}
 	if (!is_in_dictionary(input))
+	{
+		printf("Word is not in the word list!\n");
 		return(false);
+	}
 	return (true);
 }
 
@@ -59,10 +68,13 @@ static bool is_alphabetic(const char *input)
 }
 static bool is_in_dictionary(const char *input)
 {
+	char word[WORD_LENGTH + 1] = {'\0'};
 	int i = 0;
 	while (g_dict[i])
 	{
-		if (strcmp(input, g_dict[i]) == 0)
+		memcpy(word, g_dict[i], WORD_LENGTH);
+		str_toupper(word);
+		if (strcmp(input, word) == 0)
 			return (true);
 		i++;
 	}
