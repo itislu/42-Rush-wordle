@@ -1,3 +1,4 @@
+#include "utils.h"
 #include "wordle.h"
 #include "words.h"
 #include <ctype.h>
@@ -7,7 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void str_tolower(char *input);
 static bool is_valid_length(const char *input);
 static bool is_alphabetic(const char *input);
 static bool is_in_dictionary(const char *input);
@@ -37,15 +37,6 @@ bool validate_input(const char *input)
 	if (!(is_in_dictionary(input)))
 		return(false);
 	return (true);
-}
-
-static void str_tolower(char *input)
-{
-	while (*input)
-	{
-		*input = tolower(*input);
-		input++;
-	}
 }
 
 static bool is_valid_length(const char *input)
