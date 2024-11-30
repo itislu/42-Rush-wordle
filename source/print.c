@@ -8,11 +8,11 @@ void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH])
 	printf("\n");
 	for (int i = 0; i < MAX_GUESSES; i++)
 	{
-		printf("           ");
+		printf(GUESSES_INDENTATION);
 		for (int j = 0; j < WORD_LENGTH; j++)
 		{
 			print_letter(guesses[i][j]);
-			printf(" ");
+			printf(CHARACTER_SPACING);
 		}
 		printf("\n");
 	}
@@ -26,7 +26,7 @@ static void print_letter(t_letter letter)
 
 	if (c == '\0')
 	{
-		printf("_");
+		printf(PLACEHOLDER);
 		return;
 	}
 	switch (letter.color)

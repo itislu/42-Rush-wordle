@@ -15,7 +15,7 @@ static bool is_in_dictionary(const char *input);
 bool prompt_input(char **input)
 {
 	free(*input);
-	*input = readline("      Guess: ");
+	*input = readline(PROMPT);
 	if (*input == NULL)
 	{
 		return false;
@@ -32,17 +32,17 @@ bool validate_input(const char *input)
 {
 	if (!is_valid_length(input))
 	{
-		printf("      Not a 5 letter word!\n");
+		printf(MSG_INVALID_LENGTH);
 		return(false);
 	}
 	if (!is_alphabetic(input))
 	{
-		printf("All characters have to be alphabetic!\n");
+		printf(MSG_INVALID_CHARACTER);
 		return(false);
 	}
 	if (!is_in_dictionary(input))
 	{
-		printf(" Word is not in the word list!\n");
+		printf(MSG_INVALID_WORD);
 		return(false);
 	}
 	return (true);
@@ -80,17 +80,3 @@ static bool is_in_dictionary(const char *input)
 	}
 	return (false);
 }
-
-/* 
-int main()
-{
-	const char *word = "housl";
-	printf("%d\n", is_valid_length(word));
-	printf("%d\n", is_alphabetic(word));
-	printf("%d\n", is_in_dictionary(word));
-	printf("%d\n", validate_input(word));
-	for(int i = 0; word[i]; i++)
-	{
-		printf("%c", word[i]);
-	}
-} */

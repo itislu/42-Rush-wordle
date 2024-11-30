@@ -16,13 +16,13 @@ int main(void)
 	char *input = NULL;
 	int guess_count = 0;
 
-	printf("%s\n", WELCOME_ART);
+	printf(WELCOME_ART);
 	pick_word(&word);
 	while (!is_game_finished(guesses, guess_count, &word))
 	{
 		if (!prompt_input(&input))
 		{
-			printf("            Goodbye!\n");
+			printf(MSG_QUIT);
 			break;
 		}
 		if (!validate_input(input))
@@ -49,7 +49,7 @@ static bool is_game_finished(
 	}
 	if (guess_count >= MAX_GUESSES)
 	{
-		printf("    You ran out of guesses!\n");
+		printf(MSG_OUT_OF_GUESSES);
 		return true;
 	}
 	for (int i = 0; i < WORD_LENGTH; i++)
@@ -59,7 +59,7 @@ static bool is_game_finished(
 			return false;
 		}
 	}
-	printf(" You guessed '%s' correctly!\n", word->word);
-	printf("       Guesses needed: %d\n", guess_count);
+	printf(MSG_CORRECT, word->word);
+	printf(MSG_GUESSES_NEEDED, guess_count);
 	return true;
 }
