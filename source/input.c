@@ -15,7 +15,7 @@ static bool is_in_dictionary(const char *input);
 bool prompt_input(char **input)
 {
 	free(*input);
-	*input = readline("Enter your guess: ");
+	*input = readline("      Guess: ");
 	if (*input == NULL)
 	{
 		return false;
@@ -32,7 +32,7 @@ bool validate_input(const char *input)
 {
 	if (!is_valid_length(input))
 	{
-		printf("Not a 5 letter word!\n");
+		printf("      Not a 5 letter word!\n");
 		return(false);
 	}
 	if (!is_alphabetic(input))
@@ -42,7 +42,7 @@ bool validate_input(const char *input)
 	}
 	if (!is_in_dictionary(input))
 	{
-		printf("Word is not in the word list!\n");
+		printf(" Word is not in the word list!\n");
 		return(false);
 	}
 	return (true);

@@ -8,6 +8,7 @@ void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH])
 	printf("\n");
 	for (int i = 0; i < MAX_GUESSES; i++)
 	{
+		printf("           ");
 		for (int j = 0; j < WORD_LENGTH; j++)
 		{
 			print_letter(guesses[i][j]);

@@ -22,7 +22,7 @@ int main(void)
 	{
 		if (!prompt_input(&input))
 		{
-			printf("Goodbye!\n");
+			printf("            Goodbye!\n");
 			break;
 		}
 		if (!validate_input(input))
@@ -33,6 +33,7 @@ int main(void)
 		compare_guess(guesses[guess_count], word);
 		guess_count++;
 	}
+	printf("\n");
 	free(word.word);
 }
 
@@ -48,7 +49,7 @@ static bool is_game_finished(
 	}
 	if (guess_count >= MAX_GUESSES)
 	{
-		printf("You ran out of guesses!\n");
+		printf("    You ran out of guesses!\n");
 		return true;
 	}
 	for (int i = 0; i < WORD_LENGTH; i++)
@@ -58,7 +59,7 @@ static bool is_game_finished(
 			return false;
 		}
 	}
-	printf("You guessed '%s' correctly!\n", word->word);
-	printf("Guesses needed: %d\n", guess_count);
+	printf(" You guessed '%s' correctly!\n", word->word);
+	printf("       Guesses needed: %d\n", guess_count);
 	return true;
 }
