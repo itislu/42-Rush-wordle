@@ -2,29 +2,30 @@
 #include "wordle.h"
 #include "words.h"
 #include <ctype.h>
+#include <ncurses.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+
+extern volatile sig_atomic_t g_stop;
 
 static bool is_valid_length(const char *input);
 static bool is_alphabetic(const char *input);
 static bool is_in_dictionary(const char *input);
 
-bool prompt_input(char **input)
+bool prompt_input(char *input)
 {
-	free(*input);
-	*input = readline("Enter your guess: ");
-	if (*input == NULL)
+	mvprintw(MAX_GUESSES, 0, "Guess: ");
+	getstr(input);
+	if (g_stop == 1)
 	{
 		return false;
 	}
-	if (**input != '\0')
-	{
-		add_history(*input);
-	}
-	str_toupper(*input);
+	str_toupper(input);
 	return true;
 }
 
@@ -32,17 +33,17 @@ bool validate_input(const char *input)
 {
 	if (!is_valid_length(input))
 	{
-		printf("Not a 5 letter word!\n");
+		mvprintw(MAX_GUESSES + 1, 0, "Not a 5 letter word!\n");
 		return(false);
 	}
 	if (!is_alphabetic(input))
 	{
-		printf("All characters have to be alphabetic!\n");
+		mvprintw(MAX_GUESSES + 1, 0, "All characters have to be alphabetic!\n");
 		return(false);
 	}
 	if (!is_in_dictionary(input))
 	{
-		printf("Word is not in the word list!\n");
+		mvprintw(MAX_GUESSES + 1, 0, "Word is not in the word list!\n");
 		return(false);
 	}
 	return (true);
@@ -80,17 +81,3 @@ static bool is_in_dictionary(const char *input)
 	}
 	return (false);
 }
-
-/* 
-int main()
-{
-	const char *word = "housl";
-	printf("%d\n", is_valid_length(word));
-	printf("%d\n", is_alphabetic(word));
-	printf("%d\n", is_in_dictionary(word));
-	printf("%d\n", validate_input(word));
-	for(int i = 0; word[i]; i++)
-	{
-		printf("%c", word[i]);
-	}
-} */
