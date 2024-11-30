@@ -99,12 +99,14 @@ CLEAN_TARGETS	:=	clean fclean ffclean
 .DEFAULT		:
 					$(MAKE) help
 
-.DEFAULT_GOAL	:=	all
+.DEFAULT_GOAL	:=	term
 
 
 # ********************************* MODES ************************************ #
 
 ENV				:=
+RUN				:=	true
+NEW_TERM		:=	true
 
 ifeq (run, $(filter run,$(MAKECMDGOALS) $(MODE)))
 RUN				:=	true
