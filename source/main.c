@@ -16,6 +16,7 @@ int main(void)
 	char *input = NULL;
 	int guess_count = 0;
 
+	printf("%s\n", WELCOME_ART);
 	pick_word(&word);
 	print_guesses(guesses);
 	while (!is_game_finished(guesses, guess_count, &word))
