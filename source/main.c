@@ -18,9 +18,9 @@ int main(void)
 
 	printf("%s\n", WELCOME_ART);
 	pick_word(&word);
-	print_guesses(guesses);
 	while (!is_game_finished(guesses, guess_count, &word))
 	{
+		print_guesses(guesses);
 		if (!prompt_input(&input))
 		{
 			printf("Goodbye!\n");
@@ -28,12 +28,10 @@ int main(void)
 		}
 		if (!validate_input(input))
 		{
-			printf("\n");
 			continue;
 		}
 		convert_input(input, guesses[guess_count]);
 		compare_guess(guesses[guess_count], word);
-		print_guesses(guesses);
 		guess_count++;
 	}
 	free(word.word);
@@ -60,6 +58,7 @@ static bool is_game_finished(
 			return false;
 		}
 	}
+	print_guesses(guesses);
 	printf("You guessed '%s' correctly!\n", word->word);
 	printf("Guesses needed: %d\n", guess_count);
 	return true;
