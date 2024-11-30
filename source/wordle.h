@@ -20,11 +20,10 @@
 #define WORD_LENGTH 5
 #define MAX_GUESSES 6
 
-// We can do the exact wordle colors
 #define COLOR_RESET "\e[0m"
-#define COLOR_GREEN "\e[32m"
-#define COLOR_YELLOW "\e[33m"
-#define COLOR_GREY "\e[90m"
+#define COLOR_GREY "\e[1;38;2;255;255;255;48;2;58;58;60m"
+#define COLOR_YELLOW "\e[1;38;2;255;255;255;48;2;180;164;60m"
+#define COLOR_GREEN "\e[1;38;2;255;255;255;48;2;83;141;78m"
 
 typedef enum e_color
 {
