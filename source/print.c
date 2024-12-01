@@ -1,5 +1,6 @@
 #include "wordle.h"
 #include <ncursesw/curses.h>
+#include <unistd.h>
 
 static void print_letter(t_letter letter);
 
@@ -26,6 +27,7 @@ void fill_row()
 
 void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_count)
 {
+	curs_set(0);
 	for (int i = 0; i < guess_count; i++)
 	{
 		move(i + ROW_OFFSET, GUESSES_INDENTATION);
@@ -33,8 +35,14 @@ void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_c
 		{
 			print_letter(guesses[i][j]);
 			printw(CHARACTER_SPACING);
+			if (i + 1 == guess_count)
+			{
+				usleep(100000);
+				refresh();
+			}
 		}
 	}
+	curs_set(1);
 	refresh();
 }
 
