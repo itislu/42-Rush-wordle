@@ -17,10 +17,52 @@ static bool is_valid_length(const char *input);
 static bool is_alphabetic(const char *input);
 static bool is_in_dictionary(const char *input);
 
-bool prompt_input(char *input)
+bool prompt_input(char *input, int guess_count)
 {
-	mvprintw(MAX_GUESSES, 0, "Guess: ");
-	getstr(input);
+	int i = 0;
+	int c;
+	memset(input, '\0', WORD_LENGTH);
+	move(guess_count, i + i);
+	fill_row('_');
+	noecho();
+	keypad(stdscr, TRUE);
+	while ((c = getch()) != EOF)
+	{
+		//printw("%d", c);
+		if (c == '\n')
+			break;
+		if (c == KEY_LEFT || c == KEY_RIGHT || c == KEY_LEFT || c == KEY_RIGHT)
+			continue;
+		else if (c == KEY_BACKSPACE)
+		{
+			if (i == 0)
+				continue;
+			else if (i == WORD_LENGTH)
+				curs_set(1);
+			i -= 1;
+			input[i] = '\0';
+			mvprintw(guess_count, i + i, "_");
+			move(guess_count, i + i);
+			// delch();
+			// delch();
+			// delch();
+			// delch();
+		}
+		else if (i < WORD_LENGTH && isalpha(c))
+		{
+			c = toupper(c);
+			mvprintw(guess_count, i + i, "%c", c);
+			input[i] = c;
+			i++;
+			if (i == WORD_LENGTH)
+				curs_set(0);
+			move(guess_count, i + i);
+		}
+		//else if (input[i])
+		//while (i == 5 && != '\n')
+	}
+	curs_set(1);
+	input[WORD_LENGTH] = '\0';
 	if (g_stop == 1)
 	{
 		return false;

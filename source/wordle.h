@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <signal.h>
+#include <ncurses.h>
 
 #define WELCOME_ART "\
  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n\
@@ -50,9 +51,11 @@ typedef struct s_word
 void pick_word(t_word *word);
 
 bool validate_input(const char *input);
-bool prompt_input(char *input);
+bool prompt_input(char *input, int guess_count);
 void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH]);
-// void print_current_row(const t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_count);
+void print_grid(void);
+void fill_row(char c);
+
 
 void convert_input(const char *input, t_letter guess[WORD_LENGTH]);
 void compare_guess(t_letter guess[WORD_LENGTH], t_word word);

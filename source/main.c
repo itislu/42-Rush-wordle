@@ -37,21 +37,22 @@ int main(void)
 	//signal(SIGINT, &handle_sigint);
 	t_word word = {0};
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH] = {0};
-	char input[10] = {'\0'};
+	char input[WORD_LENGTH + 1] = {'\0'};
 	int guess_count = 0;
 
 	//printf("%s\n", WELCOME_ART);
 	pick_word(&word);
-	print_guesses(guesses);
+	print_grid();
 	// sleep(2);
 	while (!is_game_finished(guesses, guess_count, &word))
 	{
-		refresh();
-		if (!prompt_input(input))
+		if (!prompt_input(input, guess_count))
 		{
 			mvprintw(MAX_GUESSES + 1, 0, "Goodbye!");
 			break;
 		}
+		move(MAX_GUESSES + 1, 0);
+		clrtoeol();
 		if (!validate_input(input))
 		{
 			continue;
@@ -60,10 +61,11 @@ int main(void)
 		// print_current_row(guesses, guess_count);
 		compare_guess(guesses[guess_count], word);
 		print_guesses(guesses);
-		refresh();
 		guess_count++;
 	}
+	curs_set(0);
 	refresh();
+	sleep(5);
 	free(word.word);
 	endwin();
 }

@@ -5,9 +5,30 @@
 static void print_letter(t_letter letter);
 // static void print_current_row_letter(t_letter letter, int guess_count, int position);
 
-void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH])
+void print_grid(void)
 {
 	for (int i = 0; i < MAX_GUESSES; i++)
+	{
+		move(i, 0);
+		fill_row('_');
+	}
+}
+
+void fill_row(char c)
+{
+	int x;
+	int y;
+	getyx(stdscr, y, x);
+	for (int i = 0; i < WORD_LENGTH; i++)
+	{
+		mvprintw(y, i + i, "%c", c);
+	}
+	move(y, x);
+}
+
+void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH])
+{
+	for (int i = 0; guesses[i][0].letter != '\0'; i++)
 	{
 		move(i, 0);
 		for (int j = 0; j < WORD_LENGTH; j++)
