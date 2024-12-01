@@ -23,11 +23,14 @@ bool prompt_input(char *input, int guess_count)
 	fill_row();
 	noecho();
 	keypad(stdscr, TRUE);
+	notimeout(stdscr, TRUE);
 	while ((c = getch()) != EOF)
 	{
 		//printw("%d", c);
 		if (c == '\n')
 			break;
+		if (c == 27)
+			return false;
 		if (c == KEY_LEFT || c == KEY_RIGHT || c == KEY_LEFT || c == KEY_RIGHT)
 			continue;
 		else if (c == KEY_BACKSPACE)
