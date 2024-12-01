@@ -17,10 +17,9 @@
 
 #define COLOR_GREY 140
 
+#define GUESSES_INDENTATION   11
 #define PLACEHOLDER           "_"
 #define CHARACTER_SPACING     " "
-#define GUESSES_INDENTATION   "           "
-#define PROMPT                "      Guess: "
 #define MSG_CORRECT           " You guessed '%s' correctly!\n"
 #define MSG_GUESSES_NEEDED    "       Guesses needed: %d\n"
 #define MSG_QUIT              "            Goodbye!\n"
@@ -65,7 +64,7 @@ bool validate_input(const char *input);
 bool prompt_input(char *input, int guess_count);
 void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH]);
 void print_grid(void);
-void fill_row(char c);
+void fill_row(void);
 
 
 void convert_input(const char *input, t_letter guess[WORD_LENGTH]);

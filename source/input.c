@@ -20,8 +20,8 @@ bool prompt_input(char *input, int guess_count)
 	int i = 0;
 	int c;
 	memset(input, '\0', WORD_LENGTH);
-	move(guess_count, i + i);
-	fill_row('_');
+	move(guess_count, i + i + GUESSES_INDENTATION);
+	fill_row();
 	noecho();
 	keypad(stdscr, TRUE);
 	while ((c = getch()) != EOF)
@@ -39,8 +39,8 @@ bool prompt_input(char *input, int guess_count)
 				curs_set(1);
 			i -= 1;
 			input[i] = '\0';
-			mvprintw(guess_count, i + i, "_");
-			move(guess_count, i + i);
+			mvprintw(guess_count, i + i + GUESSES_INDENTATION, "_");
+			move(guess_count, i + i + GUESSES_INDENTATION);
 			// delch();
 			// delch();
 			// delch();
@@ -49,12 +49,12 @@ bool prompt_input(char *input, int guess_count)
 		else if (i < WORD_LENGTH && isalpha(c))
 		{
 			c = toupper(c);
-			mvprintw(guess_count, i + i, "%c", c);
+			mvprintw(guess_count, i + i + GUESSES_INDENTATION, "%c", c);
 			input[i] = c;
 			i++;
 			if (i == WORD_LENGTH)
 				curs_set(0);
-			move(guess_count, i + i);
+			move(guess_count, i + i + GUESSES_INDENTATION);
 		}
 		//else if (input[i])
 		//while (i == 5 && != '\n')
