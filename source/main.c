@@ -7,8 +7,6 @@
 #include <unistd.h>
 #include <signal.h>
 
-volatile sig_atomic_t g_stop = 0;
-
 static bool is_game_finished(
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
 	int guess_count, 
@@ -20,21 +18,11 @@ short rgb_to_ncurses(int rgb)
 	return rgb * 1000 / 255;
 }
 
-void handle_sigint(int signo)
-{
-	printf("received signal: %d", signo);
-	if (signo == SIGINT)
-	{
-		g_stop = 1;
-	}
-}
-
 int main(void)
 {
 	initscr();
 	init_colors();
 	cbreak();
-	//signal(SIGINT, &handle_sigint);
 	t_word word = {0};
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH] = {0};
 	char input[WORD_LENGTH + 1] = {'\0'};
