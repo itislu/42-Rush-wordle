@@ -5,16 +5,15 @@
 #include <signal.h>
 #include <ncursesw/curses.h>
 
-#define WELCOME_ART "\
-▗▖ ▗▖ ▗▄▖ ▗▄▄▖ ▗▄▄▄  ▗▖   ▗▄▄▄▖\n\
-▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌  █ ▐▌   ▐▌   \n\
-▐▌ ▐▌▐▌ ▐▌▐▛▀▚▖▐▌  █ ▐▌   ▐▛▀▀▘\n\
-▐▙█▟▌▝▚▄▞▘▐▌ ▐▌▐▙▄▄▀ ▐▙▄▄▖▐▙▄▄▖\n\
-"
+#define WELCOME_ART1 "▗▖ ▗▖ ▗▄▖ ▗▄▄▖ ▗▄▄▄  ▗▖   ▗▄▄▄▖\n"
+#define WELCOME_ART2 "▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌  █ ▐▌   ▐▌   \n"
+#define WELCOME_ART3 "▐▌ ▐▌▐▌ ▐▌▐▛▀▚▖▐▌  █ ▐▌   ▐▛▀▀▘\n"
+#define WELCOME_ART4 "▐▙█▟▌▝▚▄▞▘▐▌ ▐▌▐▙▄▄▀ ▐▙▄▄▖▐▙▄▄▖\n"
 
 #define WORD_LENGTH           5
 #define MAX_GUESSES           6
 
+#define INDENTATION           23
 #define COLOR_GREY            140
 #define GUESSES_INDENTATION   11
 #define ROW_OFFSET            7

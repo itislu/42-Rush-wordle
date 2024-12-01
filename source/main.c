@@ -14,6 +14,14 @@ static bool is_game_finished(
 	int guess_count, 
 	const t_word *word);
 
+void print_welcome_art()
+{
+	mvprintw(0, INDENTATION, WELCOME_ART1);
+	mvprintw(1, INDENTATION, WELCOME_ART2);
+	mvprintw(2, INDENTATION, WELCOME_ART3);
+	mvprintw(3, INDENTATION, WELCOME_ART4);
+}
+
 int main(int argc, char *argv[])
 {
 	setlocale(LC_ALL, "");
@@ -28,21 +36,21 @@ int main(int argc, char *argv[])
 	char input[WORD_LENGTH + 1] = {'\0'};
 	int guess_count = 0;
 
-	printw(WELCOME_ART);
+	print_welcome_art();
 	pick_word(&word);
 	if (g_mode & EVAL)
 	{
-		mvprintw(ROW_OFFSET - 2, 0, MSG_WORD_REVEAL, word.word);
+		mvprintw(ROW_OFFSET - 2, INDENTATION, MSG_WORD_REVEAL, word.word);
 	}
 	print_grid();
 	while (!is_game_finished(guesses, guess_count, &word))
 	{
 		if (!prompt_input(input, guess_count))
 		{
-			mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_QUIT);
+			mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION, MSG_QUIT);
 			break;
 		}
-		move(MAX_GUESSES + 1 + ROW_OFFSET, 0);
+		move(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION);
 		clrtoeol();
 		if (!validate_input(input))
 		{
@@ -71,8 +79,8 @@ static bool is_game_finished(
 	}
 	if (guess_count >= MAX_GUESSES)
 	{
-		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_OUT_OF_GUESSES);
-		mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, 0, MSG_WORD_REVEAL, word->word);
+		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION, MSG_OUT_OF_GUESSES);
+		mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, INDENTATION, MSG_WORD_REVEAL, word->word);
 		return true;
 	}
 	for (int i = 0; i < WORD_LENGTH; i++)
@@ -82,7 +90,7 @@ static bool is_game_finished(
 			return false;
 		}
 	}
-	mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_CORRECT, word->word);
-	mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, 0, MSG_GUESSES_NEEDED, guess_count);
+	mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION, MSG_CORRECT, word->word);
+	mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, INDENTATION, MSG_GUESSES_NEEDED, guess_count);
 	return true;
 }

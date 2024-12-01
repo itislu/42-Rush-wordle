@@ -8,7 +8,7 @@ void print_grid(void)
 {
 	for (int i = 0; i < MAX_GUESSES; i++)
 	{
-		move(i + ROW_OFFSET, GUESSES_INDENTATION);
+		move(i + ROW_OFFSET, GUESSES_INDENTATION + INDENTATION);
 		fill_row();
 	}
 }
@@ -20,7 +20,7 @@ void fill_row()
 	getyx(stdscr, y, x);
 	for (int i = 0; i < WORD_LENGTH; i++)
 	{
-		mvprintw(y, i + i + GUESSES_INDENTATION, "_");
+		mvprintw(y, i + i + GUESSES_INDENTATION + INDENTATION, "_");
 	}
 	move(y, x);
 }
@@ -30,7 +30,7 @@ void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_c
 	curs_set(0);
 	for (int i = 0; i < guess_count; i++)
 	{
-		move(i + ROW_OFFSET, GUESSES_INDENTATION);
+		move(i + ROW_OFFSET, GUESSES_INDENTATION + INDENTATION);
 		for (int j = 0; j < WORD_LENGTH; j++)
 		{
 			print_letter(guesses[i][j]);
