@@ -85,7 +85,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 export				CC CFLAGS MAKECMDGOALS MAKEFLAGS
 
 PHONY_TARGETS	:=	all run opt san val valfd term clear modes re clean fclean ffclean
-ENV_VARIABLES	:=	MODE
+ENV_VARIABLES	:=	MODE ARGS
 HELP_TARGETS	:=	help help-print \
 					$(addprefix help-,$(PHONY_TARGETS) $(ENV_VARIABLES)) \
 					$(addsuffix -help,$(PHONY_TARGETS) $(ENV_VARIABLES))
@@ -141,6 +141,10 @@ ifeq (clear, $(filter clear,$(MAKECMDGOALS) $(MODE)))
 CLEAR			:=	true
 endif
 
+ifdef ARGS
+RUN				:=	true
+endif
+
 
 # ***************************** BUILD TARGETS ******************************** #
 
@@ -180,10 +184,10 @@ modes			:
 					if [ "$(NEW_TERM)" = "true" ] && [ -n "$(TERMINAL)" ]; then \
 						$(TERMINAL) $(TERMINALFLAGS) \
 							"bash --posix -c 'trap \"\" SIGINT; \
-							$(ENV) ./$(NAME); \
+							$(ENV) ./$(NAME) $(ARGS); \
 							exec bash --posix'"; \
 					elif [ "$(RUN)" = "true" ]; then \
-						$(ENV) "./$(NAME)"; \
+						$(ENV) "./$(NAME)" $(ARGS); \
 					else \
 						echo -n $(MSG_USAGE); \
 					fi
@@ -278,8 +282,9 @@ help			:
 					echo
 					echo "Environment Variables:"
 					echo "  MODE             Build mode to combine multiple targets"
+					echo "  ARGS             If specified, the program will run with those arguments after compilation."
 					echo
-					echo "Usage: make [\\$(STY_UND)target\\$(STY_RES)] [MODE=\"<\\$(STY_UND)mode1\\$(STY_RES)> [\\$(STY_UND)mode2\\$(STY_RES)] [...]\"]"
+					echo "Usage: make [\\$(STY_UND)target\\$(STY_RES)] [MODE=\"<\\$(STY_UND)mode1\\$(STY_RES)> [\\$(STY_UND)mode2\\$(STY_RES)] [...]\"] [ARGS=\"'<\\$(STY_UND)arg1\\$(STY_RES)>' '[\\$(STY_UND)arg2\\$(STY_RES)]' '[...]'\"]"
 
 help-all		:
 					echo "Build the project."
@@ -287,6 +292,9 @@ help-all		:
 
 help-run		:
 					echo "Build the project and run the executable."
+					echo "Arguments to the program can be passed via the ARGS variable."
+					echo
+					echo "Usage: make run ARGS=\"'<\\$(STY_UND)arg1\\$(STY_RES)>' '[\\$(STY_UND)arg2\\$(STY_RES)]' '[...]'\"" #Maybe omit the usage
 
 help-opt		:
 					echo "Rebuild the project with the following compiler optimization flags:"
@@ -298,21 +306,30 @@ help-san		:
 
 help-val		:
 					echo "Build the project and run the executable with valgrind."
+					echo "Arguments to the program can be passed via the ARGS variable."
 					echo
 					echo "The following valgrind flags are used:"
 					echo "$(VALGRINDFLAGS)" | tr ' ' '\n' | sed 's/^/  /'
+					echo
+					echo "Usage: make val ARGS=\"'<\\$(STY_UND)arg1\\$(STY_RES)>' '[\\$(STY_UND)arg2\\$(STY_RES)]' '[...]'\""
 
 help-valfd		:
 					echo "Build the project and run the executable with valgrind and file descriptor tracking."
 					echo "A new terminal window is opened to avoid inheriting open file descriptors."
+					echo "Arguments to the program can be passed via the ARGS variable."
 					echo
 					echo "The following valgrind flags are used:"
 					echo "$(VALGRINDFLAGS)" | tr ' ' '\n' | sed 's/^/  /'
 					echo "File descriptor specific flags:"
 					echo "$(VALGRINDFDFLAGS)" | tr ' ' '\n' | sed 's/^/  /'
+					echo
+					echo "Usage: make valfd ARGS=\"'<\\$(STY_UND)arg1\\$(STY_RES)>' '[\\$(STY_UND)arg2\\$(STY_RES)]' '[...]'\""
 
 help-term		:
 					echo "Build the project and run the executable in a new terminal window."
+					echo "Arguments to the program can be passed via the ARGS variable."
+					echo
+					echo "Usage: make term ARGS=\"'<\\$(STY_UND)arg1\\$(STY_RES)>' '[\\$(STY_UND)arg2\\$(STY_RES)]' '[...]'\""
 
 help-clear		:
 					echo "Build the project and clear the terminal."
@@ -345,6 +362,11 @@ help-MODE MODE-help:
 					echo "Multiple modes can be combined by separating them with a space."
 					echo
 					echo "Usage: make <\\$(STY_UND)target\\$(STY_RES)> MODE=\"<\\$(STY_UND)mode1\\$(STY_RES)> [\\$(STY_UND)mode2\\$(STY_RES)] [...]\""
+
+help-ARGS ARGS-help:
+					echo "If specified, the program will run with those arguments after compilation."
+					echo
+					echo "Usage: make <\\$(STY_UND)target\\$(STY_RES)> ARGS=\"'<\\$(STY_UND)arg1\\$(STY_RES)>' '[\\$(STY_UND)arg2\\$(STY_RES)]' '[...]'\""
 
 %-help:
 					$(MAKE) help-$(subst -help,,$@)
