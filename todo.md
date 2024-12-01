@@ -83,7 +83,7 @@ Needed in the main loop
 
 ## Backend
 
-- [ ] Add debug/evaluation mode
+- [X] Add debug/evaluation mode
 - [ ] More common words to guess as a default word list to guess from
 - [ ] Larger default dictionary
 - [ ] Option to read the dictionary from a file
