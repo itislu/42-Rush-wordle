@@ -92,9 +92,9 @@ Needed in the main loop
 
 ## Frontend
 
-- [ ] When running out of guesses, show the word
-- [ ] Write input directly into rectangle of guesses
-- [ ] Update the interface instead of printing anew after each guess
+- [X] When running out of guesses, show the word
+- [X] Write input directly into rectangle of guesses
+- [X] Update the interface instead of printing anew after each guess
 - [ ] Zoom-in the terminal at startup
 - [ ] Display keyboard to see which letters already guessed
-- [ ] Limit input reading to 5 characters and ASCII letters only
+- [X] Limit input reading to 5 characters and ASCII letters only
