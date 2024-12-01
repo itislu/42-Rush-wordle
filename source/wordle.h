@@ -15,9 +15,10 @@
 #define WORD_LENGTH 5
 #define MAX_GUESSES 6
 
-#define COLOR_GREY 140
+#define COLOR_GREY            140
 #define GUESSES_INDENTATION   11
-#define ROW_OFFSET 7
+#define ROW_OFFSET            7
+#define ANIMATION_SPEED_US    100000
 
 #define PLACEHOLDER           "_"
 #define CHARACTER_SPACING     " "

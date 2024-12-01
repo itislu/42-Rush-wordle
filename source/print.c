@@ -37,7 +37,7 @@ void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_c
 			printw(CHARACTER_SPACING);
 			if (i + 1 == guess_count)
 			{
-				usleep(100000);
+				usleep(ANIMATION_SPEED_US);
 				refresh();
 			}
 		}
