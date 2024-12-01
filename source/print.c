@@ -8,7 +8,7 @@ void print_grid(void)
 {
 	for (int i = 0; i < MAX_GUESSES; i++)
 	{
-		move(i, GUESSES_INDENTATION);
+		move(i + ROW_OFFSET, GUESSES_INDENTATION);
 		fill_row();
 	}
 }
@@ -25,24 +25,25 @@ void fill_row()
 	move(y, x);
 }
 
-void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH])
+void print_guesses(const t_letter guesses[MAX_GUESSES][WORD_LENGTH], int guess_count)
 {
-	for (int i = 0; guesses[i][0].letter != '\0'; i++)
+	for (int i = 0; i < guess_count; i++)
 	{
 		// printf(GUESSES_INDENTATION);
-		move(i, GUESSES_INDENTATION);
+		move(i + ROW_OFFSET, GUESSES_INDENTATION);
 		for (int j = 0; j < WORD_LENGTH; j++)
 		{
-			// move(i, j * 2);
+			// move(i + ROW_OFFSET, j * 2);
 			print_letter(guesses[i][j]);
 			printw(CHARACTER_SPACING);
 		}
 	}
+	refresh();
 }
 
 static void print_letter(t_letter letter)
 {
-	int color;
+	int color = 0;
 	char c = letter.letter;
 
 	if (c == '\0')

@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 			mvprintw(MAX_GUESSES + 1, 0, MSG_QUIT);
 			break;
 		}
-		move(MAX_GUESSES + 1, 0);
+		move(MAX_GUESSES + 1 + ROW_OFFSET, 0);
 		clrtoeol();
 		if (!validate_input(input))
 		{
@@ -54,12 +54,11 @@ int main(int argc, char *argv[])
 		convert_input(input, guesses[guess_count]);
 		// print_current_row(guesses, guess_count);
 		compare_guess(guesses[guess_count], word);
-		print_guesses(guesses);
 		guess_count++;
 	}
 	curs_set(0);
 	refresh();
-	sleep(5);
+	getch();
 	free(word.word);
 	endwin();
 }
@@ -85,14 +84,15 @@ static bool is_game_finished(
 	int guess_count, 
 	const t_word *word)
 {
-	print_guesses(guesses);
+	print_guesses(guesses, guess_count);
 	if (guess_count == 0)
 	{
 		return false;
 	}
 	if (guess_count >= MAX_GUESSES)
 	{
-		mvprintw(MAX_GUESSES + 1, 0, MSG_OUT_OF_GUESSES, word->word);
+		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_OUT_OF_GUESSES);
+		mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, 0, MSG_WORD_REVEAL, word->word);
 		return true;
 	}
 	for (int i = 0; i < WORD_LENGTH; i++)
@@ -102,8 +102,7 @@ static bool is_game_finished(
 			return false;
 		}
 	}
-	print_guesses(guesses);
-	mvprintw(MAX_GUESSES + 1, 0, MSG_CORRECT, word->word);
-	mvprintw(MAX_GUESSES + 2, 0, MSG_GUESSES_NEEDED, guess_count);
+	mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_CORRECT, word->word);
+	mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, 0, MSG_GUESSES_NEEDED, guess_count);
 	return true;
 }

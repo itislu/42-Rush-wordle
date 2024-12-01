@@ -19,7 +19,7 @@ bool prompt_input(char *input, int guess_count)
 	int i = 0;
 	int c;
 	memset(input, '\0', WORD_LENGTH);
-	move(guess_count, i + i + GUESSES_INDENTATION);
+	move(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION);
 	fill_row();
 	noecho();
 	keypad(stdscr, TRUE);
@@ -38,8 +38,8 @@ bool prompt_input(char *input, int guess_count)
 				curs_set(1);
 			i -= 1;
 			input[i] = '\0';
-			mvprintw(guess_count, i + i + GUESSES_INDENTATION, "_");
-			move(guess_count, i + i + GUESSES_INDENTATION);
+			mvprintw(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION, "_");
+			move(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION);
 			// delch();
 			// delch();
 			// delch();
@@ -48,12 +48,12 @@ bool prompt_input(char *input, int guess_count)
 		else if (i < WORD_LENGTH && isalpha(c))
 		{
 			c = toupper(c);
-			mvprintw(guess_count, i + i + GUESSES_INDENTATION, "%c", c);
+			mvprintw(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION, "%c", c);
 			input[i] = c;
 			i++;
 			if (i == WORD_LENGTH)
 				curs_set(0);
-			move(guess_count, i + i + GUESSES_INDENTATION);
+			move(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION);
 		}
 		//else if (input[i])
 		//while (i == 5 && != '\n')
@@ -68,17 +68,17 @@ bool validate_input(const char *input)
 {
 	if (!is_valid_length(input))
 	{
-		mvprintw(MAX_GUESSES + 1, 0, MSG_INVALID_LENGTH);
+		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_INVALID_LENGTH);
 		return(false);
 	}
 	if (!is_alphabetic(input))
 	{
-		mvprintw(MAX_GUESSES + 1, 0, MSG_INVALID_CHARACTER);
+		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_INVALID_CHARACTER);
 		return(false);
 	}
 	if (!is_in_dictionary(input))
 	{
-		mvprintw(MAX_GUESSES + 1, 0, MSG_INVALID_WORD);
+		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_INVALID_WORD);
 		return(false);
 	}
 	return (true);
