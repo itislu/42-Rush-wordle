@@ -2,29 +2,66 @@
 #include "wordle.h"
 #include "words.h"
 #include <ctype.h>
+#include <ncurses.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 static bool is_valid_length(const char *input);
 static bool is_alphabetic(const char *input);
 static bool is_in_dictionary(const char *input);
 
-bool prompt_input(char **input)
+bool prompt_input(char *input, int guess_count)
 {
-	free(*input);
-	*input = readline(PROMPT);
-	if (*input == NULL)
+	int i = 0;
+	int c;
+	memset(input, '\0', WORD_LENGTH);
+	move(guess_count, i + i);
+	fill_row('_');
+	noecho();
+	keypad(stdscr, TRUE);
+	while ((c = getch()) != EOF)
 	{
-		return false;
+		//printw("%d", c);
+		if (c == '\n')
+			break;
+		if (c == KEY_LEFT || c == KEY_RIGHT || c == KEY_LEFT || c == KEY_RIGHT)
+			continue;
+		else if (c == KEY_BACKSPACE)
+		{
+			if (i == 0)
+				continue;
+			else if (i == WORD_LENGTH)
+				curs_set(1);
+			i -= 1;
+			input[i] = '\0';
+			mvprintw(guess_count, i + i, "_");
+			move(guess_count, i + i);
+			// delch();
+			// delch();
+			// delch();
+			// delch();
+		}
+		else if (i < WORD_LENGTH && isalpha(c))
+		{
+			c = toupper(c);
+			mvprintw(guess_count, i + i, "%c", c);
+			input[i] = c;
+			i++;
+			if (i == WORD_LENGTH)
+				curs_set(0);
+			move(guess_count, i + i);
+		}
+		//else if (input[i])
+		//while (i == 5 && != '\n')
 	}
-	if (**input != '\0')
-	{
-		add_history(*input);
-	}
-	str_toupper(*input);
+	curs_set(1);
+	input[WORD_LENGTH] = '\0';
+	str_toupper(input);
 	return true;
 }
 
@@ -32,17 +69,17 @@ bool validate_input(const char *input)
 {
 	if (!is_valid_length(input))
 	{
-		printf(MSG_INVALID_LENGTH);
+		mvprintw(MAX_GUESSES + 1, 0, MSG_INVALID_LENGTH);
 		return(false);
 	}
 	if (!is_alphabetic(input))
 	{
-		printf(MSG_INVALID_CHARACTER);
+		mvprintw(MAX_GUESSES + 1, 0, MSG_INVALID_CHARACTER);
 		return(false);
 	}
 	if (!is_in_dictionary(input))
 	{
-		printf(MSG_INVALID_WORD);
+		mvprintw(MAX_GUESSES + 1, 0, MSG_INVALID_WORD);
 		return(false);
 	}
 	return (true);
