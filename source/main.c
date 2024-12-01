@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 	{
 		if (!prompt_input(input, guess_count))
 		{
-			mvprintw(MAX_GUESSES + 1, 0, MSG_QUIT);
+			mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, 0, MSG_QUIT);
 			break;
 		}
 		move(MAX_GUESSES + 1 + ROW_OFFSET, 0);
