@@ -25,7 +25,7 @@
 #define MSG_CORRECT           " You guessed '%s' correctly!\n"
 #define MSG_GUESSES_NEEDED    "       Guesses needed: %d\n"
 #define MSG_QUIT              "            Goodbye!\n"
-#define MSG_OUT_OF_GUESSES    "    You ran out of guesses!\n"
+#define MSG_OUT_OF_GUESSES    "    You ran out of guesses! The word was: %s\n"
 #define MSG_INVALID_LENGTH    "      Not a 5 letter word!\n"
 #define MSG_INVALID_CHARACTER "All characters have to be alphabetic!\n"
 #define MSG_INVALID_WORD      " Word is not in the word list!\n"

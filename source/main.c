@@ -49,7 +49,7 @@ static bool is_game_finished(
 	}
 	if (guess_count >= MAX_GUESSES)
 	{
-		printf(MSG_OUT_OF_GUESSES);
+		printf(MSG_OUT_OF_GUESSES, word->word);
 		return true;
 	}
 	for (int i = 0; i < WORD_LENGTH; i++)
