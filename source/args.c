@@ -9,11 +9,7 @@ bool check_arguments(int argc, char *argv[])
 	(void)argc;
 	for (int i = 1; argv[i] != NULL; i++)
 	{
-		if (strcmp(argv[i], "--improved") == 0)
-		{
-			g_mode |= IMPROVED;
-		}
-		else if (strcmp(argv[i], "--eval") == 0)
+		if (strcmp(argv[i], "--eval") == 0)
 		{
 			g_mode |= EVAL;
 		}

@@ -33,8 +33,7 @@
 typedef enum e_mode
 {
 	STANDARD = 0,
-	IMPROVED = 1 << 0,
-	EVAL     = 1 << 1
+	EVAL     = 1 << 0
 } t_mode;
 
 typedef enum e_color
