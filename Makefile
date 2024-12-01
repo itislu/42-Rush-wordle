@@ -84,7 +84,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 export				CC CFLAGS MAKECMDGOALS MAKEFLAGS
 
-PHONY_TARGETS	:=	all run opt san val valfd term clear modes re clean fclean ffclean
+PHONY_TARGETS	:=	all eval run opt san val valfd term clear modes re clean fclean ffclean
 ENV_VARIABLES	:=	MODE ARGS
 HELP_TARGETS	:=	help help-print \
 					$(addprefix help-,$(PHONY_TARGETS) $(ENV_VARIABLES)) \
@@ -104,6 +104,11 @@ CLEAN_TARGETS	:=	clean fclean ffclean
 # ********************************* MODES ************************************ #
 
 ENV				:=
+
+ifeq (eval, $(filter eval,$(MAKECMDGOALS) $(MODE)))
+RUN				:=	true
+ARGS			+=	--eval
+endif
 
 ifeq (run, $(filter run,$(MAKECMDGOALS) $(MODE)))
 RUN				:=	true
@@ -169,7 +174,7 @@ all				:
 					echo -n $(MSG_USAGE)
 
 
-run opt san val valfd term clear: modes
+eval run opt san val valfd term clear: modes
 
 modes			:
 					if [ "$(RECOMPILE)" = "true" ]; then \
@@ -265,6 +270,7 @@ ffclean			:
 help			:
 					echo "Targets:"
 					echo "  all              Build the project (default target)"
+					echo "  eval			 Build the project and run the project in eval mode"
 					echo "  run              Build and run the project"
 					echo "  opt              Rebuild the project with optimizations"
 					echo "  san              Rebuild the project with sanitizers"
@@ -289,6 +295,12 @@ help			:
 help-all		:
 					echo "Build the project."
 					echo "This is the default target when no target is specified."
+
+help-eval		:
+					echo "Build the project and run the project in eval mode."
+					echo "This mode always shows the word to guess so it's easier to test the program."
+					echo
+					echo "This is equivalent to running './$(NAME) --eval'"
 
 help-run		:
 					echo "Build the project and run the executable."
@@ -430,6 +442,11 @@ MSG_USAGE		?=	"\nUsage: ./$(NAME) [--eval]\n"
 
 
 #	Build modes
+
+MSG_EVAL		:=	$(STY_BOL)$(STY_ITA)$(STY_UND)$(STY_GRE)"~~~~~~~~~~~~~~~~~~~~ EVALUATION MODE ~~~~~~~~~~~~~~~~~~~"$(STY_RES)"\n"
+ifneq (, $(filter eval,$(MAKECMDGOALS) $(MODE)))
+MSG_MODE		:=	$(MSG_MODE)$(MSG_EVAL)
+endif
 
 MSG_RUN			:=	$(STY_BOL)$(STY_ITA)$(STY_UND)$(STY_YEL)"~~~~~~~~~~~~~~~~~~~~~~~ RUN MODE ~~~~~~~~~~~~~~~~~~~~~~~"$(STY_RES)"\n"
 ifneq (, $(filter run,$(MAKECMDGOALS) $(MODE)))
