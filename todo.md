@@ -77,3 +77,24 @@ Needed in the main loop
 ## Interface
 
 - [ ] research ncurses
+
+
+# Improvements
+
+## Backend
+
+- [ ] Add debug/evaluation mode
+- [ ] More common words to guess as a default word list to guess from
+- [ ] Larger default dictionary
+- [ ] Option to read the dictionary from a file
+- [ ] Option to read the word list to guess from a file
+- [ ] Sanitize dictionary from a file for ASCII words only
+
+## Frontend
+
+- [ ] When running out of guesses, show the word
+- [ ] Write input directly into rectangle of guesses
+- [ ] Update the interface instead of printing anew after each guess
+- [ ] Zoom-in the terminal at startup
+- [ ] Display keyboard to see which letters already guessed
+- [ ] Limit input reading to 5 characters and ASCII letters only
