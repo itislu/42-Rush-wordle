@@ -107,6 +107,7 @@ ENV				:=
 
 ifeq (eval, $(filter eval,$(MAKECMDGOALS) $(MODE)))
 RUN				:=	true
+NEW_TERM		:=	true
 ARGS			+=	--eval
 endif
 
