@@ -13,14 +13,7 @@ static bool is_game_finished(
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
 	int guess_count, 
 	const t_word *word);
-
-void print_welcome_art()
-{
-	mvprintw(0, INDENTATION, WELCOME_ART1);
-	mvprintw(1, INDENTATION, WELCOME_ART2);
-	mvprintw(2, INDENTATION, WELCOME_ART3);
-	mvprintw(3, INDENTATION, WELCOME_ART4);
-}
+static void print_welcome_art(void);
 
 int main(int argc, char *argv[])
 {
@@ -65,6 +58,14 @@ int main(int argc, char *argv[])
 	getch();
 	free(word.word);
 	endwin();
+}
+
+static void print_welcome_art(void)
+{
+	mvprintw(0, INDENTATION, WELCOME_ART1);
+	mvprintw(1, INDENTATION, WELCOME_ART2);
+	mvprintw(2, INDENTATION, WELCOME_ART3);
+	mvprintw(3, INDENTATION, WELCOME_ART4);
 }
 
 static bool is_game_finished(
