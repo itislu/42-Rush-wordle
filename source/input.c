@@ -56,7 +56,6 @@ bool prompt_input(char *input, int guess_count)
 	}
 	curs_set(1);
 	input[WORD_LENGTH] = '\0';
-	str_toupper(input);
 	return true;
 }
 
