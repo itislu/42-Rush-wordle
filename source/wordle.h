@@ -12,8 +12,8 @@
 ▐▙█▟▌▝▚▄▞▘▐▌ ▐▌▐▙▄▄▀ ▐▙▄▄▖▐▙▄▄▖\n\
 "
 
-#define WORD_LENGTH 5
-#define MAX_GUESSES 6
+#define WORD_LENGTH           5
+#define MAX_GUESSES           6
 
 #define COLOR_GREY            140
 #define GUESSES_INDENTATION   11
