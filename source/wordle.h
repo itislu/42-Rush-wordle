@@ -58,6 +58,7 @@ typedef struct s_word
 extern t_mode g_mode;
 
 bool check_arguments(int argc, char *argv[]);
+void init_ncurses(void);
 
 void pick_word(t_word *word);
 
