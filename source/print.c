@@ -1,6 +1,5 @@
 #include "wordle.h"
-#include <stdio.h>
-#include <ncurses.h>
+#include <ncursesw/curses.h>
 
 static void print_letter(t_letter letter);
 // static void print_current_row_letter(t_letter letter, int guess_count, int position);

@@ -1,10 +1,10 @@
 #include "wordle.h"
+#include <locale.h>
 #include <fcntl.h>
-#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
-#include <ncurses.h>
+#include <ncursesw/curses.h>
 #include <unistd.h>
 
 static bool is_game_finished(
@@ -20,6 +20,7 @@ short rgb_to_ncurses(int rgb)
 
 int main(int argc, char *argv[])
 {
+	setlocale(LC_ALL, "");
 	if (!check_arguments(argc, argv))
 	{
 		return 1;
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
 	char input[WORD_LENGTH + 1] = {'\0'};
 	int guess_count = 0;
 
-	//printf(WELCOME_ART);
+	printw(WELCOME_ART);
 	pick_word(&word);
 	print_grid();
 	// sleep(2);

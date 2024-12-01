@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 #include <signal.h>
-#include <ncurses.h>
+#include <ncursesw/curses.h>
 
 #define WELCOME_ART "\
 ▗▖ ▗▖ ▗▄▖ ▗▄▄▖ ▗▄▄▄  ▗▖   ▗▄▄▄▖\n\

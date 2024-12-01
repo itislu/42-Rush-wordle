@@ -17,7 +17,7 @@ DEP_DIR			:=	$(BUILD_DIR)/_dep
 
 #	Dependencies
 
-LIBRARIES		:=	readline ncurses
+LIBRARIES		:=	readline ncursesw
 BUILDFILES		:=	Makefile
 
 
