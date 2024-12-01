@@ -7,6 +7,8 @@
 #include <ncursesw/curses.h>
 #include <unistd.h>
 
+t_mode g_mode = STANDARD;
+
 static bool is_game_finished(
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
 	int guess_count, 
@@ -36,6 +38,10 @@ int main(int argc, char *argv[])
 
 	printw(WELCOME_ART);
 	pick_word(&word);
+	if (g_mode & EVAL)
+	{
+		mvprintw(ROW_OFFSET - 2, 0, MSG_WORD_REVEAL, word.word);
+	}
 	print_grid();
 	// sleep(2);
 	while (!is_game_finished(guesses, guess_count, &word))

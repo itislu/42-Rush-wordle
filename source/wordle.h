@@ -17,7 +17,7 @@
 
 #define COLOR_GREY 140
 #define GUESSES_INDENTATION   11
-#define ROW_OFFSET 6
+#define ROW_OFFSET 7
 
 #define PLACEHOLDER           "_"
 #define CHARACTER_SPACING     " "
@@ -25,7 +25,7 @@
 #define MSG_GUESSES_NEEDED    "       Guesses needed: %d\n"
 #define MSG_QUIT              "            Goodbye!\n"
 #define MSG_OUT_OF_GUESSES    "    You ran out of guesses!\n"
-#define MSG_WORD_REVEAL       "      The word was: %s\n"
+#define MSG_WORD_REVEAL       "      The word is: %s\n"
 #define MSG_INVALID_LENGTH    "      Not a 5 letter word!\n"
 #define MSG_INVALID_CHARACTER "All characters have to be alphabetic!\n"
 #define MSG_INVALID_WORD      " Word is not in the word list!\n"
@@ -56,7 +56,7 @@ typedef struct s_word
 	int alphabet[26];
 } t_word;
 
-static t_mode g_mode = STANDARD;
+extern t_mode g_mode;
 
 bool check_arguments(int argc, char *argv[]);
 
