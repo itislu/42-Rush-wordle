@@ -404,7 +404,7 @@ MSG_NO_CHANGE	:=	$(STY_ITA)$(STY_WHI)"Everything up-to-date!"$(STY_RES)"\n"
 
 MSG_FAILURE		:=	$(STY_BOL)$(STY_ITA)$(STY_RED)"BUILD FAILED!"$(STY_RES)"\n"
 
-MSG_USAGE		?=	"\nUsage: ./$(NAME)\n"
+MSG_USAGE		?=	"\nUsage: ./$(NAME) [--eval]\n"
 
 
 #	Build modes
