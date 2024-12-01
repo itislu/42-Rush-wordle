@@ -26,7 +26,6 @@ bool prompt_input(char *input, int guess_count)
 	notimeout(stdscr, TRUE);
 	while ((c = getch()) != EOF)
 	{
-		//printw("%d", c);
 		if (c == '\n')
 			break;
 		if (c == 27)
@@ -43,10 +42,6 @@ bool prompt_input(char *input, int guess_count)
 			input[i] = '\0';
 			mvprintw(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION, "_");
 			move(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION);
-			// delch();
-			// delch();
-			// delch();
-			// delch();
 		}
 		else if (i < WORD_LENGTH && isalpha(c))
 		{
@@ -58,8 +53,6 @@ bool prompt_input(char *input, int guess_count)
 				curs_set(0);
 			move(guess_count + ROW_OFFSET, i + i + GUESSES_INDENTATION);
 		}
-		//else if (input[i])
-		//while (i == 5 && != '\n')
 	}
 	curs_set(1);
 	input[WORD_LENGTH] = '\0';

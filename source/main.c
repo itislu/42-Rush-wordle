@@ -43,7 +43,6 @@ int main(int argc, char *argv[])
 		mvprintw(ROW_OFFSET - 2, 0, MSG_WORD_REVEAL, word.word);
 	}
 	print_grid();
-	// sleep(2);
 	while (!is_game_finished(guesses, guess_count, &word))
 	{
 		if (!prompt_input(input, guess_count))
@@ -58,7 +57,6 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		convert_input(input, guesses[guess_count]);
-		// print_current_row(guesses, guess_count);
 		compare_guess(guesses[guess_count], word);
 		guess_count++;
 	}
