@@ -1,11 +1,11 @@
 #include "wordle.h"
+#include <fcntl.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
 #include <ncurses.h>
 #include <unistd.h>
-#include <signal.h>
 
 static bool is_game_finished(
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
@@ -18,8 +18,13 @@ short rgb_to_ncurses(int rgb)
 	return rgb * 1000 / 255;
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	if (!check_arguments(argc, argv))
+	{
+		return 1;
+	}
+
 	initscr();
 	init_colors();
 	cbreak();

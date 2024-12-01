@@ -29,6 +29,13 @@
 #define MSG_INVALID_CHARACTER "All characters have to be alphabetic!\n"
 #define MSG_INVALID_WORD      " Word is not in the word list!\n"
 
+typedef enum e_mode
+{
+	STANDARD = 0,
+	IMPROVED = 1 << 0,
+	EVAL     = 1 << 1
+} t_mode;
+
 typedef enum e_color
 {
 	GREY = 1,
@@ -47,6 +54,10 @@ typedef struct s_word
 	char *word;
 	int alphabet[26];
 } t_word;
+
+static t_mode g_mode = STANDARD;
+
+bool check_arguments(int argc, char *argv[]);
 
 void pick_word(t_word *word);
 
