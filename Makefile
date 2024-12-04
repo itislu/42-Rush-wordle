@@ -63,7 +63,7 @@ else
 TERMINALTITLE	:=	$(NAME)
 endif
 
-TERMINALFLAGS	:=	--title="$(TERMINALTITLE)" -- /bin/sh -c
+TERMINALFLAGS	:=	--title="$(TERMINALTITLE)" --
 
 
 #	Files
@@ -134,7 +134,6 @@ endif
 ifeq (valfd, $(filter valfd,$(MAKECMDGOALS) $(MODE)))
 ENV				+=	$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS)
 PATH			:=	/bin:/usr/bin:/usr/sbin:$(PATH)
-NEW_TERM		:=	true
 RUN				:=	true
 endif
 
@@ -188,10 +187,9 @@ modes			:
 						clear; \
 					fi
 					if [ "$(NEW_TERM)" = "true" ] && [ -n "$(TERMINAL)" ]; then \
-						$(TERMINAL) $(TERMINALFLAGS) \
-							"bash --posix -c 'trap \"\" SIGINT; \
-							$(ENV) ./$(NAME) $(ARGS); \
-							exec bash --posix'"; \
+						$(TERMINAL) $(TERMINALFLAGS) bash -c \
+							"trap '' SIGINT; \
+							$(ENV) ./$(NAME) $(ARGS)"; \
 					elif [ "$(RUN)" = "true" ]; then \
 						$(ENV) "./$(NAME)" $(ARGS); \
 					else \
