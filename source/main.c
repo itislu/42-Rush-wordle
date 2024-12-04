@@ -14,6 +14,7 @@ static bool is_game_finished(
 	t_letter guesses[MAX_GUESSES][WORD_LENGTH], 
 	int guess_count, 
 	const t_word *word);
+static bool is_guess_correct(t_letter guesses[WORD_LENGTH]);
 
 int main(int argc, char *argv[])
 {
@@ -78,20 +79,29 @@ static bool is_game_finished(
 	{
 		return false;
 	}
+	if (is_guess_correct(guesses[guess_count - 1]))
+	{
+		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION, MSG_CORRECT, word->word);
+		mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, INDENTATION, MSG_GUESSES_NEEDED, guess_count);
+		return true;
+	}
 	if (guess_count >= MAX_GUESSES)
 	{
 		mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION, MSG_OUT_OF_GUESSES);
 		mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, INDENTATION, MSG_WORD_REVEAL, word->word);
 		return true;
 	}
+	return false;
+}
+
+static bool is_guess_correct(t_letter guesses[WORD_LENGTH])
+{
 	for (int i = 0; i < WORD_LENGTH; i++)
 	{
-		if (guesses[guess_count - 1][i].color != GREEN)
+		if (guesses[i].color != GREEN)
 		{
 			return false;
 		}
 	}
-	mvprintw(MAX_GUESSES + 1 + ROW_OFFSET, INDENTATION, MSG_CORRECT, word->word);
-	mvprintw(MAX_GUESSES + 2 + ROW_OFFSET, INDENTATION, MSG_GUESSES_NEEDED, guess_count);
 	return true;
 }
