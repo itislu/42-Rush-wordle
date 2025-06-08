@@ -96,7 +96,9 @@ REBUILD_TARGETS	:=	opt san re
 CLEAN_TARGETS	:=	clean fclean ffclean
 
 .DEFAULT		:
-					$(MAKE) help
+					echo $(MSG_UNKNOWN)
+					echo $(MSG_TRY_HELP)
+					exit 2
 
 .DEFAULT_GOAL	:=	all
 
@@ -413,6 +415,8 @@ STY_WHI_BRI_BG	:=	"\e[107m"
 # **************************** CUSTOM MESSAGES ******************************* #
 
 MSG_PROGRESS	:=	"🔡"
+MSG_UNKNOWN		=	$(STY_ITA)"Unknown target: "$(STY_BOL)$(STY_RED)"$@"$(STY_RES)
+MSG_TRY_HELP	:=	$(STY_ITA)"Try '"$(STY_BOL)"make help"$(STY_RES)$(STY_ITA)"' for a list of available targets."$(STY_RES)
 
 
 ########################## Top-level only messages #############################
