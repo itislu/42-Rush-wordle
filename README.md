@@ -15,6 +15,8 @@ https://github.com/user-attachments/assets/3dce6b6a-5b7a-446a-b43d-e87ba8b9ed49
 
 The project was made in a setting which we at 42 Vienna call a *Rush* - we randomly get put into teams of 2-3 peers and have exactly 2 days and 5 hours.
 
+It was our first time working with the ncurses library.
+
 ---
 
 ## Try it out yourself
