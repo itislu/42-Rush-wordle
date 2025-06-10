@@ -1,8 +1,6 @@
 #include "wordle.h"
 #include <locale.h>
 #include <fcntl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <stdlib.h>
 #include <ncursesw/curses.h>
 #include <unistd.h>
