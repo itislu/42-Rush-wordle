@@ -3,8 +3,6 @@
 #include "words.h"
 #include <ctype.h>
 #include <ncursesw/curses.h>
-#include <readline/history.h>
-#include <readline/readline.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
